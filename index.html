@@ -35,60 +35,7 @@
                 linear-gradient(to bottom, var(--bg-color), var(--dark-bg));
             background-attachment: fixed;
             overflow-x: hidden;
-        }
-
-        /* Particle Background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            animation: float 10s infinite ease-in-out;
-            opacity: 0.6;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
-        }
-
-        /* Matrix Rain Effect */
-        .matrix-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.03;
-            pointer-events: none;
-            font-family: 'Fira Code', monospace;
-            font-size: 14px;
-            color: var(--matrix-green);
-            overflow: hidden;
-        }
-
-        .matrix-column {
-            position: absolute;
-            top: -100%;
-            white-space: nowrap;
-            animation: matrix-fall linear infinite;
-        }
-
-        @keyframes matrix-fall {
-            to { top: 100%; }
-        }        nav {
+        }nav {
             background-color: rgba(10, 10, 26, 0.85);
             backdrop-filter: blur(15px);
             padding: 1rem;
@@ -244,67 +191,6 @@
             text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
             letter-spacing: 2px;
             position: relative;
-            animation: title-glow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes title-glow {
-            from { filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.5)); }
-            to { filter: drop-shadow(0 0 40px rgba(153, 0, 255, 0.8)); }
-        }
-
-        /* Gaming Stats HUD */
-        .stats-hud {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            background: rgba(21, 21, 37, 0.9);
-            border: 1px solid var(--primary-color);
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            z-index: 999;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .stats-hud:hover {
-            transform: translateY(-50%) scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-
-        .stat-value {
-            color: var(--success-color);
-            font-weight: bold;
-        }
-
-        .progress-bar {
-            width: 100px;
-            height: 4px;
-            background: var(--dark-bg);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 2px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
-            border-radius: 2px;
-            animation: progress-glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes progress-glow {
-            from { box-shadow: 0 0 5px rgba(0, 243, 255, 0.5); }
-            to { box-shadow: 0 0 15px rgba(0, 255, 136, 0.8); }
         }
 
         .hero-subtitle {
@@ -555,7 +441,6 @@
             border-radius: 4px;
             font-size: 0.8rem;
             transition: all 0.3s ease;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
@@ -579,38 +464,6 @@
 
         .tech-badge:hover::before {
             left: 0;
-        }
-
-        /* Achievement Notifications */
-        .achievement {
-            position: fixed;
-            top: 100px;
-            right: -400px;
-            background: rgba(21, 21, 37, 0.95);
-            border: 2px solid var(--success-color);
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'Fira Code', monospace;
-            color: var(--success-color);
-            z-index: 1001;
-            transition: right 0.5s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-        }
-
-        .achievement.show {
-            right: 20px;
-        }
-
-        .achievement-icon {
-            display: inline-block;
-            margin-right: 10px;
-            font-size: 1.2rem;
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .social-links {
@@ -856,45 +709,8 @@
             <div class="loading-spinner"></div>
             <div class="loading-text">Loading...</div>
         </div>
-    </div>
-
-    <!-- Scroll Progress Bar -->
+    </div>    <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- Particle Background -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Matrix Background -->
-    <div class="matrix-bg" id="matrixBg"></div>
-
-    <!-- Achievement Notification -->
-    <div class="achievement" id="achievement">
-        <span class="achievement-icon">🏆</span>
-        <span id="achievementText">Achievement Unlocked!</span>
-    </div>
-
-    <!-- Gaming Stats HUD -->
-    <div class="stats-hud" id="statsHud">
-        <div class="stat-item">
-            <span>LEVEL:</span>
-            <span class="stat-value" id="userLevel">∞</span>
-        </div>
-        <div class="stat-item">
-            <span>XP:</span>
-            <span class="stat-value" id="userXP">9999</span>
-        </div>
-        <div class="stat-item">
-            <span>SKILLS:</span>
-            <span class="stat-value">85%</span>
-        </div>
-        <div class="progress-bar">
-            <div class="progress-fill" style="width: 85%"></div>
-        </div>
-        <div class="stat-item">
-            <span>STATUS:</span>
-            <span class="stat-value">ONLINE</span>
-        </div>
-    </div>
 
     <nav id="navbar">
         <div class="nav-content">
@@ -1086,7 +902,6 @@
                 loadingScreen.style.opacity = '0';
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
-                    showAchievement('Welcome to the Matrix!', '🌐');
                 }, 500);
             }, 2000);
         });
@@ -1125,93 +940,6 @@
             }
         });
 
-        // Create Particle Background
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 10 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Create Matrix Rain Effect
-        function createMatrixRain() {
-            const matrixBg = document.getElementById('matrixBg');
-            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-            const columns = Math.floor(window.innerWidth / 20);
-            
-            for (let i = 0; i < columns; i++) {
-                const column = document.createElement('div');
-                column.className = 'matrix-column';
-                column.style.left = i * 20 + 'px';
-                column.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                column.style.animationDelay = Math.random() * 2 + 's';
-                
-                let text = '';
-                for (let j = 0; j < 20; j++) {
-                    text += chars[Math.floor(Math.random() * chars.length)] + '<br>';
-                }
-                column.innerHTML = text;
-                
-                matrixBg.appendChild(column);
-            }
-        }
-
-        // Achievement System
-        function showAchievement(text, icon = '🏆') {
-            const achievement = document.getElementById('achievement');
-            const achievementText = document.getElementById('achievementText');
-            const achievementIcon = document.querySelector('.achievement-icon');
-            
-            achievementIcon.textContent = icon;
-            achievementText.textContent = text;
-            achievement.classList.add('show');
-            
-            setTimeout(() => {
-                achievement.classList.remove('show');
-            }, 4000);
-        }
-
-        // Interactive Tech Badges
-        document.addEventListener('DOMContentLoaded', () => {
-            const techBadges = document.querySelectorAll('.tech-badge');
-            const achievements = [
-                { badge: 'React', text: 'React Master!', icon: '⚛️' },
-                { badge: 'Node.js', text: 'Backend Ninja!', icon: '🟢' },
-                { badge: 'Python', text: 'Python Wizard!', icon: '🐍' },
-                { badge: 'JavaScript', text: 'JS Rockstar!', icon: '🚀' },
-                { badge: 'Docker', text: 'Container Captain!', icon: '🐳' },
-                { badge: 'AWS', text: 'Cloud Commander!', icon: '☁️' }
-            ];
-            
-            techBadges.forEach(badge => {
-                badge.addEventListener('click', () => {
-                    const achievement = achievements.find(a => badge.textContent === a.badge);
-                    if (achievement) {
-                        showAchievement(achievement.text, achievement.icon);
-                    }
-                });
-            });
-        });
-
-        // Update Stats HUD
-        function updateStats() {
-            const userXP = document.getElementById('userXP');
-            let currentXP = parseInt(userXP.textContent);
-            
-            setInterval(() => {
-                currentXP += Math.floor(Math.random() * 10) + 1;
-                userXP.textContent = currentXP;
-            }, 5000);
-        }
-
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1224,59 +952,6 @@
                     });
                 }
             });
-        });
-
-        // Initialize effects
-        createParticles();
-        createMatrixRain();
-        updateStats();
-
-        // Konami Code Easter Egg
-        let konamiCode = [];
-        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
-        
-        document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.keyCode);
-            if (konamiCode.length > konamiSequence.length) {
-                konamiCode.shift();
-            }
-            
-            if (konamiCode.join(',') === konamiSequence.join(',')) {
-                showAchievement('Konami Code Activated! 🎮', '🕹️');
-                document.body.style.filter = 'hue-rotate(180deg)';
-                setTimeout(() => {
-                    document.body.style.filter = 'none';
-                }, 3000);
-            }
-        });
-
-        // Section intersection observer for achievements
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
-        };
-
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const sectionId = entry.target.id;
-                    const achievements = {
-                        'about': 'Explorer Badge Unlocked! 🎯',
-                        'projects': 'Project Viewer! 💼',
-                        'skills': 'Skill Scanner! 🔍',
-                        'contact': 'Connection Established! 📡'
-                    };
-                    
-                    if (achievements[sectionId]) {
-                        showAchievement(achievements[sectionId]);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        // Observe sections
-        document.querySelectorAll('section[id]').forEach(section => {
-            sectionObserver.observe(section);
         });
     </script>
 </body>
