@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PGrayCS - Software Developer</title>
+    <title>PGrayCS - Tech Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --text-color: #1f2937;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
+            --primary-color: #00f3ff;
+            --secondary-color: #9900ff;
+            --accent-color: #ff0055;
+            --text-color: #e0e0e0;
+            --bg-color: #0a0a1a;
+            --card-bg: #151525;
+            --dark-bg: #080815;
         }
 
         * {
@@ -21,20 +26,27 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Rajdhani', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 25% 10%, rgba(0, 243, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 75% 90%, rgba(153, 0, 255, 0.05) 0%, transparent 40%),
+                linear-gradient(to bottom, var(--bg-color), var(--dark-bg));
+            background-attachment: fixed;
         }
 
         nav {
-            background-color: var(--card-bg);
+            background-color: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(10px);
             padding: 1rem;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
         }
 
         .nav-content {
@@ -43,6 +55,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+            letter-spacing: 1px;
         }
 
         .nav-links {
@@ -54,29 +74,98 @@
             text-decoration: none;
             color: var(--text-color);
             font-weight: 500;
-            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--primary-color);
         }
 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         .hero {
-            padding: 8rem 2rem 4rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, rgba(0, 243, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(225deg, rgba(153, 0, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            letter-spacing: 2px;
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto;
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .typewriter {
+            border-right: 2px solid var(--primary-color);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 4s steps(40) infinite, blink 0.5s step-end infinite alternate;
+            padding-right: 5px;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            50% { width: 100% }
+            90% { width: 100% }
+            to { width: 0 }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent }
         }
 
         .container {
@@ -86,13 +175,129 @@
         }
 
         .section {
-            margin-bottom: 4rem;
+            margin-bottom: 6rem;
+            position: relative;
         }
 
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
             text-align: center;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color), var(--secondary-color));
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            position: relative;
+            padding: 20px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 8px;
+            background-color: rgba(21, 21, 37, 0.7);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background-size: 200% 200%;
+            animation: gradient-shift 3s ease infinite;
+            color: var(--dark-bg);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+        }
+
+        .terminal {
+            background-color: var(--dark-bg);
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            position: relative;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 7px;
+        }
+
+        .btn-red { background-color: #ff5f57; }
+        .btn-yellow { background-color: #febc2e; }
+        .btn-green { background-color: #28c840; }
+
+        .terminal-title {
+            margin-left: 10px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .terminal-text {
+            line-height: 1.5;
+        }
+
+        .terminal-text .prompt {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .terminal-text .command {
+            color: #ffffff;
+        }
+
+        .terminal-text .output {
+            color: #a0a0a0;
+            margin: 5px 0 15px 0;
+            display: block;
         }
 
         .cards {
@@ -106,45 +311,225 @@
             background: var(--card-bg);
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color), var(--primary-color));
+            z-index: -1;
+            background-size: 400%;
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .card:hover::before {
+            opacity: 1;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        .card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            background-color: rgba(0, 0, 0, 0.2);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
-        .social-links a {
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             color: var(--text-color);
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .social-links a:hover {
-            color: var(--primary-color);
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-name {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .social-link:hover .social-icon {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 243, 255, 0.3);
+        }
+
+        .social-link:hover .social-icon::before {
+            opacity: 1;
         }
 
         footer {
-            background-color: var(--card-bg);
-            padding: 2rem;
+            background-color: var(--dark-bg);
+            padding: 3rem 2rem;
             text-align: center;
             margin-top: 4rem;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            position: relative;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
         }
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+            
+            .menu-toggle {
+                display: flex;
             }
             
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                background-color: rgba(10, 10, 26, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .terminal {
+                order: -1;
+            }
+        }
+
+        /* Animation classes */
+        .glitch-effect {
+            animation: glitch 1s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px, 0) skew(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px, 0) skew(0deg);
+            }
+            62% {
+                transform: translate(0, 0) skew(5deg);
             }
         }
     </style>
@@ -152,56 +537,193 @@
 <body>
     <nav>
         <div class="nav-content">
-            <h2>PGrayCS</h2>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
+            <h2 class="logo">PGRAY<span class="highlight">//</span>CS</h2>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">about_me</a>
+                <a href="#projects">projects</a>
+                <a href="#skills">skills</a>
+                <a href="#contact">contact</a>
             </div>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>Hello, I'm Peter Gray</h1>
-        <p>Software Developer • Problem Solver • Tech Enthusiast</p>
+        <div class="hero-content">
+            <h1>PETER <span class="highlight">GRAY</span></h1>
+            <p class="hero-subtitle typewriter">Software Developer · Problem Solver · Tech Enthusiast</p>
+        </div>
     </section>
 
     <div class="container">
         <section id="about" class="section">
-            <h2 class="section-title">About Me</h2>
-            <p>I'm a passionate software developer with expertise in building modern web applications. I love solving complex problems and creating efficient, elegant solutions.</p>
+            <h2 class="section-title">about_me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a passionate software developer with expertise in building modern applications and solving complex problems. I thrive on technical challenges and creating elegant, efficient solutions.</p>
+                    <p>With a focus on web development and a love for cutting-edge technologies, I craft digital experiences that push boundaries.</p>
+                    <div class="skills">
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Full Stack</span>
+                    </div>
+                </div>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-button btn-red"></div>
+                        <div class="terminal-button btn-yellow"></div>
+                        <div class="terminal-button btn-green"></div>
+                        <div class="terminal-title">pgraycs-terminal</div>
+                    </div>
+                    <div class="terminal-text">
+                        <div><span class="prompt">$</span> <span class="command">whoami</span></div>
+                        <span class="output">Peter Gray, Software Developer</span>
+                        <div><span class="prompt">$</span> <span class="command">cat skills.txt</span></div>
+                        <span class="output">Frontend Development, Backend Systems, Database Design, UI/UX, Problem Solving</span>
+                        <div><span class="prompt">$</span> <span class="command">./start_conversation.sh</span></div>
+                        <span class="output">Initializing contact channels... Ready to connect!</span>
+                        <div><span class="prompt">$</span> <span class="command">_</span></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="projects" class="section">
-            <h2 class="section-title">Featured Projects</h2>
+            <h2 class="section-title">featured_projects</h2>
             <div class="cards">
                 <div class="card">
-                    <h3>Project 1</h3>
-                    <p>Description of your amazing project goes here. What problems did it solve? What technologies did you use?</p>
+                    <div class="card-content">
+                        <h3>Project Alpha</h3>
+                        <p>A cutting-edge web application featuring real-time data analysis and interactive visualizations for tech industry metrics.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">Socket.io</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="card">
-                    <h3>Project 2</h3>
-                    <p>Description of another fantastic project. Highlight your achievements and technical skills.</p>
+                    <div class="card-content">
+                        <h3>Neural Net</h3>
+                        <p>Machine learning system designed to analyze and predict user behavior across digital platforms with 95% accuracy.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">TensorFlow</span>
+                            <span class="tech-badge">AWS</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="card">
-                    <h3>Project 3</h3>
-                    <p>One more project to showcase your diverse skill set and problem-solving abilities.</p>
+                    <div class="card-content">
+                        <h3>Crypto Tracker</h3>
+                        <p>Blockchain-based application for monitoring cryptocurrency markets with customizable alerts and portfolio management.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Vue.js</span>
+                            <span class="tech-badge">Express</span>
+                            <span class="tech-badge">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2 class="section-title">tech_stack</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Frontend</h3>
+                        <p>Building responsive, interactive user interfaces with modern frameworks and cutting-edge technologies.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Vue</span>
+                            <span class="tech-badge">Angular</span>
+                            <span class="tech-badge">HTML5/CSS3</span>
+                            <span class="tech-badge">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Backend</h3>
+                        <p>Developing scalable server systems and APIs that power complex applications securely and efficiently.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Java</span>
+                            <span class="tech-badge">GraphQL</span>
+                            <span class="tech-badge">RESTful APIs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3>DevOps</h3>
+                        <p>Implementing continuous integration and deployment pipelines for smooth software delivery.</p>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Docker</span>
+                            <span class="tech-badge">Kubernetes</span>
+                            <span class="tech-badge">AWS</span>
+                            <span class="tech-badge">CI/CD</span>
+                            <span class="tech-badge">Git</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="section">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title">connect_with_me</h2>
             <div class="social-links">
-                <a href="https://github.com/PGrayCS" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/PGrayCS" target="_blank" class="social-link">
+                    <div class="social-icon"><i class="fab fa-github"></i></div>
+                    <span class="social-name">GitHub</span>
+                </a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-link">
+                    <div class="social-icon"><i class="fab fa-linkedin"></i></div>
+                    <span class="social-name">LinkedIn</span>
+                </a>
+                <a href="mailto:your.email@example.com" class="social-link">
+                    <div class="social-icon"><i class="fas fa-envelope"></i></div>
+                    <span class="social-name">Email</span>
+                </a>
+                <a href="https://twitter.com/yourusername" target="_blank" class="social-link">
+                    <div class="social-icon"><i class="fab fa-twitter"></i></div>
+                    <span class="social-name">Twitter</span>
+                </a>
             </div>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2025 PGrayCS. All rights reserved.</p>
+        <div class="footer-content">
+            <h2 class="logo">PGRAY<span class="highlight">//</span>CS</h2>
+            <p class="footer-text">&copy; 2025 · Crafted with <span class="highlight">< / ></span> and caffeine</p>
+        </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
