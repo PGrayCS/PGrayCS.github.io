@@ -727,13 +727,14 @@
           display: block;
         }
         .dropbtn {
+          /* match nav-links anchor styling */
+          font-family: 'Rajdhani', sans-serif;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          padding: 0.5rem 0;
           background: none;
           border: none;
-          margin: 0 1rem;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          font-size: 0.9rem;
-          font-weight: 500;
           color: var(--text-color);
           cursor: pointer;
           position: relative;
@@ -778,7 +779,7 @@
                 <span></span>
             </div>
             <div class="nav-links" id="navLinks">
-                <a href="#about">about_me</a>
+                <a href="#about">about_me</a> 
                 <a href="#projects">projects</a>
                 <div class="dropdown">
                     <button class="dropbtn">tools</button>
