@@ -1,70 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paper Fold Studio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
-        
-        .game-container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-        
-        .back-link {
-            display: inline-block;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.2);
-            text-decoration: none;
-            color: white;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .back-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Paperfold Studio Web</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <h1>🎮 Paper Fold Studio</h1>
-        <p>Your HTML game will go here!</p>
-        <p>This subdirectory is ready for your game development.</p>
-        <a href="../" class="back-link">← Back to PGrayCS</a>
+  <div id="game-container">
+    <h1>Paperfold Studio</h1>
+    <div id="fold-display">Folds: 0</div>
+    <div id="rate-display">Folds/s: 0</div>
+    <button id="fold-button">Fold!</button>
+
+    <h2>Assistant</h2>
+    <div id="assistant-info">Level: 0 (0/s) - Cost: 10</div>
+    <button id="hire-assistant-button">Hire/Upgrade Assistant</button>
+
+    <h2>Origami Sets</h2>
+    <ul id="set-list"></ul>
+
+    <h2>Skills (<span id="skill-points">0</span> points)</h2>
+    <ul id="skill-list"></ul>
+
+    <h2>Prestige</h2>
+    <div id="prestige-info">Prestige count: 0</div>
+    <button id="prestige-button">Exhibit (Reset for bonus)</button>
+
+    <div class="save-controls">
+      <button id="save-button">Save</button>
+      <button id="load-button">Load</button>
     </div>
+  </div>
+  <script src="game.js"></script>
 </body>
 </html>
