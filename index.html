@@ -722,41 +722,9 @@
         }
         .dropdown-content a:hover {
           background-color: var(--primary-color);
-        }
-        .dropdown:hover .dropdown-content {
+        }        .dropdown:hover .dropdown-content {
           display: block;
         }
-    .dropbtn {
-      /* Exactly match .nav-links a styling */
-      text-decoration: none;
-      color: var(--text-color);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      position: relative;
-      padding: 0.5rem 0;
-      transition: all 0.3s ease;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-    }
-    .dropbtn::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-      transition: width 0.3s ease;
-    }
-    .dropdown:hover .dropbtn {
-      color: var(--primary-color);
-    }
-    .dropdown:hover .dropbtn::after {
-      width: 100%;
-    }
     </style>
 </head>
 <body>
@@ -779,21 +747,20 @@
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
-            <div class="nav-links" id="navLinks">
+            </div>            <div class="nav-links" id="navLinks">
                 <a href="#about">about_me</a> 
                 <a href="#projects">projects</a>
                 <div class="dropdown">
-                    <button class="dropbtn">tools</button>
+                    <a href="#" class="dropbtn">tools</a>
                     <div class="dropdown-content">
                         <a href="#">Tool Placeholder</a>
                         <!-- Add more tool links here -->
                     </div>
                 </div>
                 <div class="dropdown">
-                    <button class="dropbtn">games</button>
+                    <a href="#" class="dropbtn">games</a>
                     <div class="dropdown-content">
-                        <a href="#">Game One</a>
+                        <a href="#">Game Placeholder</a>
                         <!-- Add more game links here -->
                     </div>
                 </div>
