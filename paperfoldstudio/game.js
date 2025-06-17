@@ -12,6 +12,7 @@ const prestigeInfo = document.getElementById('prestige-info');
 const prestigeButton = document.getElementById('prestige-button');
 const saveButton = document.getElementById('save-button');
 const loadButton = document.getElementById('load-button');
+const clearSaveButton = document.getElementById('clear-save-button');
 
 let foldCount = 0;
 let foldsPerClick = 1;
@@ -24,12 +25,15 @@ const prestigeBonus = 0.1;
 
 let origamiSets = [
   { name: 'Crane Set', cost: 100, completed: false },
-  { name: 'Flower Set', cost: 500, completed: false }
+  { name: 'Flower Set', cost: 500, completed: false },
+  { name: 'Dragon Set', cost: 2000, completed: false },
+  { name: 'Garden Set', cost: 10000, completed: false }
 ];
 
 let skills = [
   { name: 'Faster Assistants', cost: 1, purchased: false },
-  { name: '+1 Fold/Click', cost: 1, purchased: false }
+  { name: '+1 Fold/Click', cost: 1, purchased: false },
+  { name: 'Double Fold/Click', cost: 2, purchased: false }
 ];
 
 function assistantCost() {
@@ -83,6 +87,8 @@ function purchaseSkill(index) {
       baseFoldsPerSecond += 0.5;
     } else if (skill.name === '+1 Fold/Click') {
       foldsPerClick += 1;
+    } else if (skill.name === 'Double Fold/Click') {
+      foldsPerClick *= 2;
     }
     updateDisplay();
   }
@@ -115,6 +121,22 @@ function prestige() {
   foldsPerClick = 1;
   origamiSets.forEach(set => set.completed = false);
   skills.forEach(skill => skill.purchased = false);
+  updateDisplay();
+}
+
+function resetGame() {
+  foldCount = 0;
+  skillPoints = 0;
+  assistantLevel = 0;
+  baseFoldsPerSecond = 1;
+  foldsPerClick = 1;
+  origamiSets.forEach(set => (set.completed = false));
+  skills.forEach(skill => (skill.purchased = false));
+}
+
+function clearSave() {
+  localStorage.removeItem('paperfold-save');
+  resetGame();
   updateDisplay();
 }
 
@@ -171,9 +193,14 @@ loadButton.addEventListener('click', () => {
   loadGame();
   alert('Game loaded!');
 });
+clearSaveButton.addEventListener('click', () => {
+  clearSave();
+  alert('Save cleared!');
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   loadGame();
   updateDisplay();
   setInterval(tick, 1000);
+  setInterval(saveGame, 30000);
 });
