@@ -13,6 +13,7 @@ const prestigeButton = document.getElementById('prestige-button');
 const saveButton = document.getElementById('save-button');
 const loadButton = document.getElementById('load-button');
 const clearSaveButton = document.getElementById('clear-save-button');
+const progressBar = document.getElementById('progress-bar');
 
 let foldCount = 0;
 let foldsPerClick = 1;
@@ -44,12 +45,36 @@ function foldsPerSecond() {
   return assistantLevel * baseFoldsPerSecond * (1 + prestigeCount * prestigeBonus);
 }
 
+function spawnConfetti() {
+  const confetti = document.createElement('div');
+  confetti.className = 'confetti';
+  const size = Math.random() * 6 + 4;
+  confetti.style.backgroundColor = `hsl(${Math.random() * 360},100%,60%)`;
+  confetti.style.width = `${size}px`;
+  confetti.style.height = `${size}px`;
+  const rect = foldButton.getBoundingClientRect();
+  confetti.style.left = `${rect.left + rect.width / 2}px`;
+  confetti.style.top = `${rect.top}px`;
+  document.body.appendChild(confetti);
+  setTimeout(() => confetti.remove(), 1000);
+}
+
 function updateDisplay() {
   foldDisplay.textContent = `Folds: ${Math.floor(foldCount)}`;
   rateDisplay.textContent = `Folds/s: ${foldsPerSecond().toFixed(1)}`;
   assistantInfo.textContent = `Level: ${assistantLevel} (${foldsPerSecond().toFixed(1)}/s) - Cost: ${assistantCost()}`;
   skillPointsEl.textContent = skillPoints;
   prestigeInfo.textContent = `Prestige count: ${prestigeCount}`;
+
+  const next = origamiSets.find(set => !set.completed);
+  if (next) {
+    const percent = Math.min((foldCount / next.cost) * 100, 100);
+    progressBar.style.width = percent + '%';
+    progressBar.textContent = `${Math.floor(percent)}% to ${next.name}`;
+  } else {
+    progressBar.style.width = '100%';
+    progressBar.textContent = 'All sets completed!';
+  }
 
   // Update sets
   setList.innerHTML = '';
@@ -99,6 +124,9 @@ function checkSets() {
     if (!set.completed && foldCount >= set.cost) {
       set.completed = true;
       skillPoints += 1;
+      for (let i = 0; i < 10; i++) {
+        spawnConfetti();
+      }
     }
   });
 }
@@ -122,6 +150,9 @@ function prestige() {
   origamiSets.forEach(set => set.completed = false);
   skills.forEach(skill => skill.purchased = false);
   updateDisplay();
+  for (let i = 0; i < 20; i++) {
+    spawnConfetti();
+  }
 }
 
 function resetGame() {
@@ -181,6 +212,9 @@ function loadGame() {
 // Event wiring
 foldButton.addEventListener('click', () => {
   addFold(foldsPerClick);
+  for (let i = 0; i < 5; i++) {
+    spawnConfetti();
+  }
 });
 
 hireAssistantButton.addEventListener('click', hireAssistant);
