@@ -183,13 +183,27 @@
             opacity: 0.15;
             animation: float-random 15s infinite ease-in-out;
             filter: blur(1px);
+            --parallax-x: 0px;
+            --parallax-y: 0px;
         }
 
         @keyframes float-random {
-            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.15; }
-            25% { transform: translate(20px, -30px) rotate(90deg) scale(1.2); opacity: 0.35; }
-            50% { transform: translate(-15px, -60px) rotate(180deg) scale(0.9); opacity: 0.25; }
-            75% { transform: translate(30px, -40px) rotate(270deg) scale(1.1); opacity: 0.35; }
+            0%, 100% { 
+                transform: translate(var(--parallax-x, 0px), var(--parallax-y, 0px)) translate(0, 0) rotate(0deg) scale(1); 
+                opacity: 0.15; 
+            }
+            25% { 
+                transform: translate(var(--parallax-x, 0px), var(--parallax-y, 0px)) translate(20px, -30px) rotate(90deg) scale(1.2); 
+                opacity: 0.35; 
+            }
+            50% { 
+                transform: translate(var(--parallax-x, 0px), var(--parallax-y, 0px)) translate(-15px, -60px) rotate(180deg) scale(0.9); 
+                opacity: 0.25; 
+            }
+            75% { 
+                transform: translate(var(--parallax-x, 0px), var(--parallax-y, 0px)) translate(30px, -40px) rotate(270deg) scale(1.1); 
+                opacity: 0.35; 
+            }
         }
 
         .hero-content {
@@ -1114,12 +1128,16 @@
             observer.observe(el);
         });
 
-        // Enhanced cursor trail effect
+        // Enhanced cursor trail effect with throttling
         const createCursorTrail = () => {
-            const trail = [];
-            const trailLength = 10;
+            let lastTime = 0;
+            const throttleDelay = 32; // ~30fps
             
             document.addEventListener('mousemove', (e) => {
+                const currentTime = Date.now();
+                if (currentTime - lastTime < throttleDelay) return;
+                lastTime = currentTime;
+                
                 const particle = document.createElement('div');
                 particle.style.cssText = `
                     position: fixed;
@@ -1155,17 +1173,28 @@
         
         createCursorTrail();
 
-        // Add parallax effect to floating elements
+        // Add parallax effect to floating elements with throttling
+        let lastParallaxTime = 0;
+        const parallaxThrottle = 16; // ~60fps
+        
         document.addEventListener('mousemove', (e) => {
-            const floatingIcons = document.querySelectorAll('.floating-icon');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
+            const currentTime = Date.now();
+            if (currentTime - lastParallaxTime < parallaxThrottle) return;
+            lastParallaxTime = currentTime;
             
-            floatingIcons.forEach((icon, index) => {
-                const speed = (index + 1) * 10;
-                const x = (mouseX - 0.5) * speed;
-                const y = (mouseY - 0.5) * speed;
-                icon.style.transform = `translate(${x}px, ${y}px)`;
+            requestAnimationFrame(() => {
+                const floatingIcons = document.querySelectorAll('.floating-icon');
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+                
+                floatingIcons.forEach((icon, index) => {
+                    const speed = (index + 1) * 10;
+                    const x = (mouseX - 0.5) * speed;
+                    const y = (mouseY - 0.5) * speed;
+                    // Preserve existing animation by not overriding transform completely
+                    icon.style.setProperty('--parallax-x', `${x}px`);
+                    icon.style.setProperty('--parallax-y', `${y}px`);
+                });
             });
         });
 
